@@ -60,4 +60,7 @@ class Snake:
         if self.head.heading() != UP:
             self.head.setheading(DOWN)
 
+    def pause(self):
+        self.head.forward(0)
+
 
