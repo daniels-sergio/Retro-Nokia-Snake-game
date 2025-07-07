@@ -21,8 +21,11 @@ food = Food()
 score = Scoreboard()
 
 game_on = True
+paused = False
 screen.listen()
-
+def pause_game():
+    global paused
+    paused = not paused
 
 screen.onkey(snake.up, "w")
 screen.onkey(snake.left, "a")
@@ -33,9 +36,16 @@ screen.onkey(snake.right, "d")
 faults = 0
 
 while game_on:
+    screen.onkey(pause_game, "space")
+    if paused:
+        snake.pause()
+    else:
+        snake.move()
+
+
     screen.update()
     time.sleep(0.1)
-    snake.move()
+
     #detects collision with food
     if snake.head.distance(food) < 15:
         food.appear()
